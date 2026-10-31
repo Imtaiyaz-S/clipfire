@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% set wide = true %}
+{% block title %}Job tracker - Learning notebook{% endblock %}
+{% block content %}
+<h1>Job tracker</h1>
+<p class="lede">{{ tabs[0][2] }} compan{{ 'y' if tabs[0][2] == 1 else 'ies' }}, {{ tabs[1][2] }} dream, {{ tabs[2][2] }} hiring now, {{ applications }} application{{ '' if applications == 1 else 's' }}.</p>
+
+{% if editable %}
+<form method="post" action="/jobs/companies" class="form quick">
+  <label>Seen a company? Add it
+    <input name="name" required placeholder="Company name">
+  </label>
+  <label>Careers or job link
+    <input name="careers_url" placeholder="https://...">
+  </label>
+  <label>Openings
+    <select name="hiring">{% for k, label in hiring_labels.items() %}<option value="{{ k }}">{{ label }}</option>{% endfor %}</select>
+  </label>
+  <label class="check"><input type="checkbox" name="dream" value="1"> Dream company</label>
+  <button class="btn">Add company</button>
+</form>
+{% endif %}
+
+<nav class="tabs" aria-label="Filter companies">
+  {% for key, label, n in tabs %}
+  <a href="/jobs{{ '?f=' ~ key if key }}" {% if f == key %}aria-current="page"{% endif %}>{{ label }} ({{ n }})</a>
+  {% endfor %}
+</nav>
+
+{% if rows %}
+<div class="table-wrap">
+<table class="jobs">
+  <thead><tr><th>Company</th><th>Openings</th><th>Applications</th><th>Stage</th><th>Links</th></tr></thead>
+  <tbody>
+  {% for c in rows %}
+  <tr id="c-{{ c.id }}">
+    <td class="name">
+      <a href="/jobs/companies/{{ c.id }}">{% if c.dream %}<span class="star" title="Dream company">&#9733;</span> {% endif %}{{ c.name }}</a>
+    </td>
+    <td>
+      <span class="chip tone-{{ tone[c.hiring] }}">{{ hiring_labels[c.hiring] }}</span>
+      {% if c.hiring != 'unknown' %}<small class="muted">checked {{ c.hiring_checked }}</small>{% endif %}
+    </td>
+    <td>{{ c.info.apps or '' }}</td>
+    <td>
+      <span class="chip tone-{{ tone[c.info.status] }}">{{ c.info.status }}</span>
+      {% if c.info.rounds %}<small class="muted">{{ c.info.rounds }} round{{ '' if c.info.rounds == 1 else 's' }}</small>{% endif %}
+    </td>
+    <td class="links">
+      {% if c.careers_url %}<a href="{{ c.careers_url }}" target="_blank" rel="noopener">Careers</a>{% endif %}
+      {% if c.website %}<a href="{{ c.website }}" target="_blank" rel="noopener">Website</a>{% endif %}
+      {% if c.linkedin %}<a href="{{ c.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+<p class="empty">{{ 'No companies match this filter.' if f else 'No companies yet.' }}{% if editable and not f %} Add the first one above.{% endif %}</p>
+{% endif %}
+{% endblock %}

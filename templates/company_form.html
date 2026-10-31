@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set wide = true %}
+{% block title %}{{ 'Edit company' if company else 'Add company' }} - Job tracker{% endblock %}
+{% block content %}
+<p class="crumb"><a href="/jobs">Job tracker</a></p>
+<h1>{{ 'Edit ' ~ company.name if company else 'Add a company' }}</h1>
+{% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+<form method="post" action="{{ '/jobs/companies/' ~ company.id if company else '/jobs/companies' }}" class="form">
+  <label>Company name <input name="name" required value="{{ f.name }}" autofocus></label>
+  <label class="check"><input type="checkbox" name="dream" value="1" {{ 'checked' if f.dream }}> Dream company</label>
+  <label>Openings
+    <select name="hiring">{% for k, label in hiring_labels.items() %}<option value="{{ k }}" {{ 'selected' if f.hiring == k }}>{{ label }}</option>{% endfor %}</select>
+  </label>
+  <label>Careers page <input name="careers_url" value="{{ f.careers_url }}" placeholder="https://company.com/careers"></label>
+  <label>Website <input name="website" value="{{ f.website }}" placeholder="https://company.com"></label>
+  <label>LinkedIn page <input name="linkedin" value="{{ f.linkedin }}" placeholder="https://linkedin.com/company/..."></label>
+  <label>Other links
+    <textarea name="other_links" rows="3" placeholder="One per line. Markdown works, for example [Glassdoor](https://...)">{{ f.other_links }}</textarea>
+  </label>
+  <label>Notes
+    <textarea name="notes" rows="5" placeholder="Why this company, tech stack, people you know there">{{ f.notes }}</textarea>
+  </label>
+  <div class="actions">
+    <button class="btn">Save</button>
+    <a class="btn ghost" href="{{ '/jobs/companies/' ~ company.id if company else '/jobs' }}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

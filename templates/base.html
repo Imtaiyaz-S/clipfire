@@ -17,13 +17,15 @@
     <input type="search" name="q" value="{{ q|default('') }}" placeholder="Search notes, links, questions" aria-label="Search">
   </form>
   <nav class="toplinks">
-    <a href="/companies">Companies</a>
+    {% if tracker_enabled %}<a href="/jobs">Job tracker</a>{% endif %}
+    <a href="/companies">Company questions</a>
     <a href="/revise{% if current_topic %}?topic={{ current_topic }}{% endif %}">Revise</a>
   </nav>
   <span class="mode {{ 'mode-edit' if editable else 'mode-read' }}">{{ 'Editing on this computer' if editable else 'Read-only' }}</span>
 </header>
 
-<div class="shell">
+<div class="shell{{ " wide" if wide }}">
+  {% if not wide %}
   <details class="index" id="index">
     <summary>Topics</summary>
     {% for group, items in groups %}
@@ -39,6 +41,7 @@
     {% endfor %}
     {% if editable %}<a class="btn ghost add-topic" href="/topics/new">Add a topic</a>{% endif %}
   </details>
+  {% endif %}
 
   <main>{% block content %}{% endblock %}</main>
 </div>
@@ -47,7 +50,7 @@
 <script>
   hljs.highlightAll();
   const idx = document.getElementById("index");
-  if (window.matchMedia("(min-width: 900px)").matches) idx.open = true;
+  if (idx && window.matchMedia("(min-width: 900px)").matches) idx.open = true;
 </script>
 </body>
 </html>

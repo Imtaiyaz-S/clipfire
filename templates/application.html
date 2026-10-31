@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% set wide = true %}
+{% block title %}{{ a.title }} at {{ c.name }} - Job tracker{% endblock %}
+{% block content %}
+<p class="crumb"><a href="/jobs">Job tracker</a> / <a href="/jobs/companies/{{ c.id }}">{{ c.name }}</a></p>
+<h1>{{ a.title }}</h1>
+<p class="hiring-line"><span class="chip tone-{{ tone[a.status] }}">{{ a.status }}</span></p>
+
+{% if editable %}
+<div class="actions">
+  <a class="btn" href="/jobs/rounds/new?application={{ a.id }}">Add an interview round</a>
+  <a class="btn ghost" href="/jobs/applications/{{ a.id }}/edit">Edit application</a>
+</div>
+{% endif %}
+
+<dl class="facts">
+  <dt>Job link</dt>
+  <dd>{% if a.job_url %}<a href="{{ a.job_url }}" target="_blank" rel="noopener">{{ a.job_url }}</a>{% else %}<span class="muted">Not saved</span>{% endif %}</dd>
+  <dt>Applied on</dt>
+  <dd>{% if a.applied_on %}{{ a.applied_on }} ({{ days_ago(a.applied_on) }}){% else %}<span class="muted">Not applied yet</span>{% endif %}</dd>
+  <dt>Referral</dt>
+  <dd>{{ referral_labels[a.referral] }}{% if a.referral_contact %}, {{ a.referral_contact }}{% endif %}</dd>
+  <dt>Reply</dt>
+  <dd>
+    {% if a.reply_received %}Got a reply{% if a.reply_date %} on {{ a.reply_date }}{% endif %}{% else %}<span class="muted">No reply yet</span>{% endif %}
+    {% if a.reply_notes %}<div class="prose">{{ a.reply_notes|markdown }}</div>{% endif %}
+  </dd>
+</dl>
+{% if a.notes %}<h2>Notes</h2><div class="prose">{{ a.notes|markdown }}</div>{% endif %}
+
+<h2>Interview rounds</h2>
+{% for r in a.rounds %}
+<article class="entry round" id="r-{{ r.id }}">
+  <header>
+    <span class="chip tone-{{ tone[r.outcome] or 'neutral' }}">{{ r.outcome }}</span>
+    <span>{{ r.date or 'Date not recorded' }}</span>
+  </header>
+  <h3>{{ r.name }}</h3>
+  <dl class="facts">
+    <dt>Interviewer</dt><dd>{{ r.interviewer or '-' }}</dd>
+    <dt>Followed up</dt>
+    <dd>{% if r.follow_up_date %}{{ r.follow_up_date }} ({{ days_ago(r.follow_up_date) }}){% else %}<span class="muted">Not yet</span>{% endif %}</dd>
+  </dl>
+  {% if r.follow_up_update %}<h4>Update from the recruiter</h4><div class="prose">{{ r.follow_up_update|markdown }}</div>{% endif %}
+  {% if r.questions %}<h4>Questions asked</h4><div class="prose">{{ r.questions|markdown }}</div>{% endif %}
+  {% if r.notes %}<h4>Notes</h4><div class="prose">{{ r.notes|markdown }}</div>{% endif %}
+  {% if editable %}
+  <footer>
+    <span></span>
+    <span class="tools">
+      <a href="/jobs/rounds/{{ r.id }}/edit">Edit</a>
+      <form method="post" action="/jobs/rounds/{{ r.id }}/delete" onsubmit="return confirm('Delete this round?')">
+        <button class="linklike danger">Delete</button>
+      </form>
+    </span>
+  </footer>
+  {% endif %}
+</article>
+{% else %}
+<p class="empty">No interview rounds yet.{% if editable %} Add one when you hear back.{% endif %}</p>
+{% endfor %}
+
+{% if editable %}
+<form method="post" action="/jobs/applications/{{ a.id }}/delete" onsubmit="return confirm('Delete this application and its rounds?')" class="spaced">
+  <button class="linklike danger">Delete this application</button>
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% set wide = true %}
+{% block title %}{{ 'Edit round' if r else 'Add round' }} - Job tracker{% endblock %}
+{% block content %}
+<p class="crumb"><a href="/jobs">Job tracker</a> / <a href="/jobs/companies/{{ c.id }}">{{ c.name }}</a> / <a href="/jobs/applications/{{ a.id }}">{{ a.title }}</a></p>
+<h1>{{ 'Edit ' ~ r.name if r else 'Add an interview round' }}</h1>
+{% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+<form method="post" action="{{ '/jobs/rounds/' ~ r.id if r else '/jobs/rounds' }}" class="form">
+  <input type="hidden" name="application_id" value="{{ a.id }}">
+  <div class="two">
+    <label>Round
+      <input name="name" list="round-names" value="{{ f.name }}">
+      <datalist id="round-names">
+        {% for n in ['Recruiter screen', 'Round 1', 'Round 2', 'Round 3', 'Managerial round', 'HR round', 'Final round'] %}<option value="{{ n }}">{% endfor %}
+      </datalist>
+    </label>
+    <label>Outcome
+      <select name="outcome">{% for o in outcomes %}<option {{ 'selected' if f.outcome == o }}>{{ o }}</option>{% endfor %}</select>
+    </label>
+  </div>
+  <div class="two">
+    <label>Interview date <input type="date" name="date" value="{{ f.date }}"></label>
+    <label>Interviewer <input name="interviewer" value="{{ f.interviewer }}" placeholder="Name and role"></label>
+  </div>
+  <label>Questions asked
+    <textarea name="questions" rows="9" placeholder="One per line or as a list. Markdown works.">{{ f.questions }}</textarea>
+  </label>
+  <div class="two">
+    <label>Followed up with the recruiter on <input type="date" name="follow_up_date" value="{{ f.follow_up_date }}"></label>
+  </div>
+  <label>What did the recruiter say?
+    <textarea name="follow_up_update" rows="3">{{ f.follow_up_update }}</textarea>
+  </label>
+  <label>Notes <textarea name="notes" rows="4">{{ f.notes }}</textarea></label>
+  <div class="actions">
+    <button class="btn">Save</button>
+    <a class="btn ghost" href="/jobs/applications/{{ a.id }}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

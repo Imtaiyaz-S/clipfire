@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% set wide = true %}
+{% block title %}{{ 'Edit application' if application else 'Add application' }} - Job tracker{% endblock %}
+{% block content %}
+<p class="crumb"><a href="/jobs">Job tracker</a> / <a href="/jobs/companies/{{ c.id }}">{{ c.name }}</a></p>
+<h1>{{ 'Edit application' if application else 'Add an application at ' ~ c.name }}</h1>
+{% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+<form method="post" action="{{ '/jobs/applications/' ~ application.id if application else '/jobs/applications' }}" class="form">
+  <input type="hidden" name="company_id" value="{{ c.id }}">
+  <label>Job title <input name="title" required value="{{ f.title }}" placeholder="Senior Data Engineer" autofocus></label>
+  <label>Link to the job you applied for <input name="job_url" value="{{ f.job_url }}" placeholder="https://..."></label>
+  <div class="two">
+    <label>Applied on <input type="date" name="applied_on" value="{{ f.applied_on }}"></label>
+    <label>Status
+      <select name="status">{% for s in statuses %}<option {{ 'selected' if f.status == s }}>{{ s }}</option>{% endfor %}</select>
+    </label>
+  </div>
+  <div class="two">
+    <label>Referral
+      <select name="referral">{% for k, label in referral_labels.items() %}<option value="{{ k }}" {{ 'selected' if f.referral == k }}>{{ label }}</option>{% endfor %}</select>
+    </label>
+    <label>Referral contact <input name="referral_contact" value="{{ f.referral_contact }}" placeholder="Who did you ask?"></label>
+  </div>
+  <label class="check"><input type="checkbox" name="reply_received" value="1" {{ 'checked' if f.reply_received }}> I got a reply</label>
+  <div class="two">
+    <label>Reply date <input type="date" name="reply_date" value="{{ f.reply_date }}"></label>
+  </div>
+  <label>What did the reply say?
+    <textarea name="reply_notes" rows="3">{{ f.reply_notes }}</textarea>
+  </label>
+  <label>Notes <textarea name="notes" rows="4">{{ f.notes }}</textarea></label>
+  <div class="actions">
+    <button class="btn">Save</button>
+    <a class="btn ghost" href="{{ '/jobs/applications/' ~ application.id if application else '/jobs/companies/' ~ c.id }}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

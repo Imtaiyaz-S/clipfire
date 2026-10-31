@@ -27,7 +27,8 @@ templates = Jinja2Templates(directory=BASE / "templates")
 templates.env.filters["markdown"] = lambda text: Markup(
     md.markdown(text or "", extensions=["fenced_code", "tables", "sane_lists"])
 )
-templates.env.globals.update(editable=EDITABLE, type_labels=store.KINDS)
+TRACKER = EDITABLE or os.getenv("TRACKER_PUBLIC") == "1"  # job tracker: local only unless opted in
+templates.env.globals.update(editable=EDITABLE, type_labels=store.KINDS, tracker_enabled=TRACKER)
 
 
 def render(request: Request, name: str, status_code: int = 200, **extra):
@@ -188,3 +189,9 @@ def remove_topic(slug: str):
     if error:
         raise HTTPException(400, error)
     return RedirectResponse("/", status_code=303)
+
+
+if TRACKER:
+    import jobs
+
+    jobs.register(app, templates, render, require_local, store)

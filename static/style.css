@@ -171,3 +171,46 @@ fieldset.kinds legend { font-weight: 600; padding: 0 6px; }
 .topic-hits { list-style: none; padding: 0; margin: 8px 0 0; }
 .topic-hits li { padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 1.05rem; }
 .topic-hits .count { margin-left: 10px; }
+
+/* ---- job tracker ---- */
+.shell.wide { grid-template-columns: minmax(0, 1fr); max-width: 1100px; }
+.muted { color: var(--muted); }
+.small { font-size: 0.92rem; }
+.star { color: #c28a00; }
+.notice { background: #fff8d6; border-left: 4px solid #e0c200; padding: 10px 14px; max-width: 760px; }
+.spaced { margin-top: 40px; }
+.hiring-line { display: flex; gap: 12px; align-items: center; margin: 4px 0 8px; }
+.links-row { display: flex; flex-wrap: wrap; gap: 18px; margin: 12px 0; font-weight: 600; }
+.inline-form { display: inline-flex; gap: 10px; margin: 0; }
+.entry h4 { margin: 14px 0 0; font-size: 0.95rem; }
+
+.chip { display: inline-block; padding: 1px 10px; border-radius: 3px; font-size: 0.85rem; font-weight: 600; background: var(--paper); color: var(--muted); }
+.chip.tone-good { background: #e1f3e6; color: #17652f; }
+.chip.tone-active { background: #d9eeee; color: var(--teal-dark); }
+.chip.tone-info { background: #e3e9f6; color: var(--slate); }
+.chip.tone-bad { background: #fbe4e1; color: var(--danger); }
+
+.table-wrap { overflow-x: auto; margin-top: 8px; }
+table.jobs { width: 100%; border-collapse: collapse; }
+table.jobs th { text-align: left; font-size: 0.9rem; color: var(--muted); font-weight: 600; padding: 8px 12px; border-bottom: 2px solid var(--line); white-space: nowrap; }
+table.jobs td { padding: 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.jobs td.name { font-weight: 600; font-size: 1.05rem; }
+table.jobs td.name a { text-decoration: none; }
+table.jobs td small { display: block; margin-top: 2px; }
+table.jobs td.links { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+table.jobs tr:target { background: #fffbe0; }
+
+.form.quick { grid-template-columns: 2fr 2fr 1fr auto auto; align-items: end; max-width: none; margin: 18px 0 8px; padding: 16px; background: var(--paper); border: 1px dashed var(--line); border-radius: 3px; }
+.form label.check { display: inline-flex; flex-direction: row; align-items: center; gap: 8px; font-weight: 400; }
+.form .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form input[type=date] { font: inherit; padding: 8px 12px; border: 1px solid var(--line); border-radius: 3px; background: #fff; width: 100%; }
+
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 22px; margin: 14px 0; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+.entry.card h3, .entry.round h3 { margin-top: 8px; }
+
+@media (max-width: 899px) {
+  .form.quick { grid-template-columns: 1fr; }
+  .form .two { grid-template-columns: 1fr; }
+}
