@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Add a topic - Learning notebook{% endblock %}
+{% block content %}
+<h1>Add a topic</h1>
+{% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+<form method="post" action="/topics" class="form">
+  <label>Topic name
+    <input name="name" required value="{{ f.name }}" placeholder="Apache Airflow" autofocus>
+  </label>
+  <label>Group
+    <input name="group" list="group-list" required value="{{ f.group }}" placeholder="Pick a group or type a new one">
+    <datalist id="group-list">{% for g in group_options %}<option value="{{ g }}">{% endfor %}</datalist>
+  </label>
+  <div class="actions">
+    <button class="btn">Add topic</button>
+    <a class="btn ghost" href="/">Cancel</a>
+  </div>
+</form>
+{% endblock %}

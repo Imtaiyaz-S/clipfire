@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Companies - Learning notebook{% endblock %}
+{% block content %}
+<h1>Interview questions by company</h1>
+{% for name, items in companies %}
+<details class="company-block" {% if companies|length == 1 %}open{% endif %}>
+  <summary><strong>{{ name }}</strong> <span class="count">{{ items|length }} question{{ '' if items|length == 1 else 's' }}</span></summary>
+  {% for e in items %}{% set show_topic = true %}{% set hide_company = true %}{% include "_entry.html" %}{% endfor %}
+</details>
+{% else %}
+<p class="empty">No company questions yet.{% if editable %} When you add an interview question, fill in the company field.{% endif %}</p>
+{% endfor %}
+{% endblock %}

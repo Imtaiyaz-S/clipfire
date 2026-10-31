@@ -1,0 +1,31 @@
+<article class="entry entry-{{ e.kind }}" id="e-{{ e.id }}">
+  <header>
+    <span class="kind">{{ type_labels[e.kind] }}</span>
+    {% if show_topic %}<a class="topic-link" href="/topic/{{ e.topic }}">{{ topic_names[e.topic] }}</a>{% endif %}
+    {% if e.company and not hide_company %}<span class="company">{{ e.company }}</span>{% endif %}
+  </header>
+  {% if e.kind == 'link' %}
+    <h3><a href="{{ e.url }}" target="_blank" rel="noopener">{{ e.title }}</a></h3>
+    <p class="url">{{ e.url }}</p>
+  {% else %}
+    <h3><span>{{ e.title }}</span></h3>
+  {% endif %}
+  {% if e.body %}
+    {% if e.kind == 'question' %}
+      <details class="answer"><summary>Show answer</summary><div class="prose">{{ e.body|markdown }}</div></details>
+    {% else %}
+      <div class="prose">{{ e.body|markdown }}</div>
+    {% endif %}
+  {% endif %}
+  <footer>
+    <span class="date">Added {{ e.created[:10] }}{% if e.updated[:10] != e.created[:10] %}, updated {{ e.updated[:10] }}{% endif %}</span>
+    {% if editable %}
+    <span class="tools">
+      <a href="/entries/{{ e.id }}/edit">Edit</a>
+      <form method="post" action="/entries/{{ e.id }}/delete" onsubmit="return confirm('Delete this entry?')">
+        <button class="linklike danger">Delete</button>
+      </form>
+    </span>
+    {% endif %}
+  </footer>
+</article>

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Edit entry' if entry else 'Add entry' }} - Learning notebook{% endblock %}
+{% block content %}
+<h1>{{ 'Edit entry' if entry else 'Add to your notebook' }}</h1>
+{% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+
+<form method="post" action="{{ '/entries/' ~ entry.id if entry else '/entries' }}" class="form">
+  <label>Topic
+    <select name="topic" required>
+      <option value="" {{ 'selected' if not f.topic }} disabled>Choose a topic</option>
+      {% for group, items in groups %}
+      <optgroup label="{{ group }}">
+        {% for t in items %}<option value="{{ t.slug }}" {{ 'selected' if t.slug == f.topic }}>{{ t.name }}</option>{% endfor %}
+      </optgroup>
+      {% endfor %}
+    </select>
+  </label>
+
+  <fieldset class="kinds">
+    <legend>What are you adding?</legend>
+    {% for k, label in type_labels.items() %}
+    <label class="radio"><input type="radio" name="kind" value="{{ k }}" {{ 'checked' if f.kind == k }}> {{ label }}</label>
+    {% endfor %}
+  </fieldset>
+
+  <label>Title
+    <input name="title" required value="{{ f.title }}" placeholder="What is this about, or what was the question?">
+  </label>
+
+  <label data-for="link">Link
+    <input name="url" type="text" value="{{ f.url }}" placeholder="https://docs.aws.amazon.com/...">
+  </label>
+
+  <label data-for="question">Company (optional)
+    <input name="company" list="companies" value="{{ f.company }}" placeholder="Where was this asked?">
+    <datalist id="companies">{% for c in company_options %}<option value="{{ c }}">{% endfor %}</datalist>
+  </label>
+
+  <label>Details
+    <textarea name="body" rows="14" placeholder="Notes, or your answer. Markdown works: **bold**, lists, tables and ```code``` blocks.">{{ f.body }}</textarea>
+  </label>
+
+  <div class="actions">
+    <button class="btn">Save</button>
+    <a class="btn ghost" href="{{ '/topic/' ~ f.topic if f.topic else '/' }}">Cancel</a>
+  </div>
+</form>
+
+<script>
+  function sync() {
+    const kind = document.querySelector('input[name=kind]:checked');
+    const k = kind ? kind.value : "note";
+    document.querySelectorAll("[data-for]").forEach(el => el.hidden = el.dataset.for !== k);
+    document.querySelector("input[name=url]").required = k === "link";
+  }
+  document.querySelectorAll("input[name=kind]").forEach(r => r.addEventListener("change", sync));
+  sync();
+</script>
+{% endblock %}

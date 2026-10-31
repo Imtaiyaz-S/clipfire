@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Revise - Learning notebook{% endblock %}
+{% block content %}
+<h1>Revise{% if topic %}: {{ topic.name }}{% endif %}</h1>
+<p class="lede">Read the prompt, answer it in your head, then open it to check. Reload for a new set.</p>
+<div class="actions">
+  <a class="btn" href="/revise{% if topic %}?topic={{ topic.slug }}{% endif %}">Shuffle again</a>
+  {% if topic %}<a class="btn ghost" href="/revise">All topics</a>{% endif %}
+</div>
+
+{% for e in entries %}
+<article class="entry entry-{{ e.kind }}">
+  <header>
+    <span class="kind">{{ type_labels[e.kind] }}</span>
+    <a class="topic-link" href="/topic/{{ e.topic }}">{{ topic_names[e.topic] }}</a>
+    {% if e.company %}<span class="company">{{ e.company }}</span>{% endif %}
+  </header>
+  <h3><span>{{ e.title }}</span></h3>
+  {% if e.body %}
+  <details class="answer"><summary>{{ 'Show answer' if e.kind == 'question' else 'Show my note' }}</summary>
+    <div class="prose">{{ e.body|markdown }}</div></details>
+  {% endif %}
+</article>
+{% else %}
+<p class="empty">Add a few notes or questions first, then come back to revise them.</p>
+{% endfor %}
+{% endblock %}

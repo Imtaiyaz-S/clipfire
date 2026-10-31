@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ 'What did you learn today?' if editable else 'Study notes' }}</h1>
+<p class="lede">{{ total }} entr{{ 'y' if total == 1 else 'ies' }} across {{ topic_count }} topics.</p>
+
+{% if editable %}
+<div class="actions">
+  <a class="btn" href="/new?kind=note">Add a note</a>
+  <a class="btn ghost" href="/new?kind=link">Add a link</a>
+  <a class="btn ghost" href="/new?kind=question">Add an interview question</a>
+  <a class="btn ghost" href="/topics/new">Add a topic</a>
+</div>
+{% endif %}
+
+<h2>Recently added</h2>
+{% for e in recent %}{% set show_topic = true %}{% include "_entry.html" %}
+{% else %}
+<p class="empty">Nothing here yet.{% if editable %} Pick a topic on the left, or add your first note above.{% endif %}</p>
+{% endfor %}
+
+{% endblock %}

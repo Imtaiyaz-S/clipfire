@@ -1,0 +1,292 @@
+{
+  "topics": [
+    {
+      "slug": "aws-s3",
+      "name": "AWS S3",
+      "group": "AWS"
+    },
+    {
+      "slug": "bedrock",
+      "name": "Bedrock",
+      "group": "AWS"
+    },
+    {
+      "slug": "ec2",
+      "name": "EC2",
+      "group": "AWS"
+    },
+    {
+      "slug": "ecs",
+      "name": "ECS",
+      "group": "AWS"
+    },
+    {
+      "slug": "aws-batch",
+      "name": "AWS Batch",
+      "group": "AWS"
+    },
+    {
+      "slug": "step-functions",
+      "name": "Step Functions",
+      "group": "AWS"
+    },
+    {
+      "slug": "lambda",
+      "name": "Lambda",
+      "group": "AWS"
+    },
+    {
+      "slug": "glue",
+      "name": "Glue",
+      "group": "AWS"
+    },
+    {
+      "slug": "sagemaker",
+      "name": "SageMaker",
+      "group": "AWS"
+    },
+    {
+      "slug": "emr",
+      "name": "EMR",
+      "group": "AWS"
+    },
+    {
+      "slug": "vpc",
+      "name": "VPC",
+      "group": "AWS"
+    },
+    {
+      "slug": "ecr",
+      "name": "ECR",
+      "group": "AWS"
+    },
+    {
+      "slug": "eks",
+      "name": "EKS",
+      "group": "AWS"
+    },
+    {
+      "slug": "managed-kafka-msk",
+      "name": "Managed Kafka (MSK)",
+      "group": "AWS"
+    },
+    {
+      "slug": "cloudwatch",
+      "name": "CloudWatch",
+      "group": "AWS"
+    },
+    {
+      "slug": "opensearch",
+      "name": "OpenSearch",
+      "group": "AWS"
+    },
+    {
+      "slug": "ai-fundamentals",
+      "name": "AI fundamentals",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "langgraph",
+      "name": "LangGraph",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "langchain",
+      "name": "LangChain",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "strands",
+      "name": "Strands",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "autogen",
+      "name": "AutoGen",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "azure-ai",
+      "name": "Azure AI",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "google-adk",
+      "name": "Google ADK",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "crewai",
+      "name": "CrewAI",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "rag",
+      "name": "RAG",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "vector-databases",
+      "name": "Vector databases",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "chromadb",
+      "name": "ChromaDB",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "pinecone",
+      "name": "Pinecone",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "milvus",
+      "name": "Milvus",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "mcp",
+      "name": "MCP",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "agentic-ai",
+      "name": "Agentic AI",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "nlp",
+      "name": "NLP",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "lstm",
+      "name": "LSTM",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "transformers",
+      "name": "Transformers",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "azure-ai-foundry",
+      "name": "Azure AI Foundry",
+      "group": "AI and agents"
+    },
+    {
+      "slug": "databricks",
+      "name": "Databricks",
+      "group": "Data and streaming"
+    },
+    {
+      "slug": "snowflake",
+      "name": "Snowflake",
+      "group": "Data and streaming"
+    },
+    {
+      "slug": "elasticsearch",
+      "name": "Elasticsearch",
+      "group": "Data and streaming"
+    },
+    {
+      "slug": "kafka",
+      "name": "Kafka",
+      "group": "Data and streaming"
+    },
+    {
+      "slug": "pyspark",
+      "name": "PySpark",
+      "group": "Data and streaming"
+    },
+    {
+      "slug": "sql",
+      "name": "SQL",
+      "group": "Data and streaming"
+    },
+    {
+      "slug": "pandas",
+      "name": "Pandas",
+      "group": "Data and streaming"
+    },
+    {
+      "slug": "python",
+      "name": "Python",
+      "group": "Python and web"
+    },
+    {
+      "slug": "pydantic",
+      "name": "Pydantic",
+      "group": "Python and web"
+    },
+    {
+      "slug": "django",
+      "name": "Django",
+      "group": "Python and web"
+    },
+    {
+      "slug": "flask",
+      "name": "Flask",
+      "group": "Python and web"
+    },
+    {
+      "slug": "fastapi",
+      "name": "FastAPI",
+      "group": "Python and web"
+    },
+    {
+      "slug": "terraform",
+      "name": "Terraform",
+      "group": "Infrastructure"
+    },
+    {
+      "slug": "cloudformation",
+      "name": "CloudFormation",
+      "group": "Infrastructure"
+    },
+    {
+      "slug": "docker",
+      "name": "Docker",
+      "group": "Infrastructure"
+    },
+    {
+      "slug": "distributed-systems",
+      "name": "Distributed systems",
+      "group": "Engineering craft"
+    },
+    {
+      "slug": "design-patterns",
+      "name": "Design patterns",
+      "group": "Engineering craft"
+    },
+    {
+      "slug": "consultant-training",
+      "name": "Consultant training",
+      "group": "Engineering craft"
+    },
+    {
+      "slug": "general-interview-questions",
+      "name": "General interview questions",
+      "group": "Interviews"
+    },
+    {
+      "slug": "kubernetes",
+      "name": "kubernetes",
+      "group": "Infrastructure"
+    }
+  ],
+  "entries": [
+    {
+      "id": "a50971a2",
+      "topic": "kubernetes",
+      "kind": "note",
+      "title": "Desired State Management",
+      "body": "Desired State Management is the core operational principle of Kubernetes. Instead of giving the system a list of step-by-step commands to execute (an imperative approach), you tell Kubernetes exactly how you want your application environment to look (a declarative approach) using YAML or JSON manifests.\r\nKubernetes then assumes the responsibility of constantly monitoring the system and automatically making changes to ensure the actual reality matches your requested setup.\r\n\r\nThe Thermostat Analogy 🌡️\r\n\r\nThe easiest way to understand this is to think of a household thermostat.\r\n• Desired State: You set the temperature to 72°F.\r\n• Actual State: The current room temperature is 65°F.\r\n• The Loop: The thermostat detects the 7-degree difference and automatically turns on the heater. Once the room hits 72°F, it turns the heater off. If someone opens a window and the room cools down, it kicks back on automatically.\r\nIn Kubernetes, you don't tell the system to \"spin up a server.\" You tell it: \"I want exactly 3 replicas of my web app running at all times.\"\r\n\r\nThe Three-Step Reconciliation Loop\r\n\r\nKubernetes achieves this management style through a continuous, never-ending control loop (often called a sync or reconciliation loop) handled by the Kubernetes Control Plane.\r\n       +------------------------------------+\r\n\r\n       |   1. Observe (Check Actual State)  |\r\n       +-----------------+------------------+\r\n                         |\r\n                         v\r\n       +-----------------+------------------+\r\n\r\n       |  2. Diff (Compare with Desired)   |\r\n       +-----------------+------------------+\r\n                         |\r\n                         v\r\n       +-----------------+------------------+\r\n\r\n       | 3. Act (Reconcile Discrepancy)   |\r\n       +------------------------------------+\r\n1. Observe: The system continuously tracks the actual, real-time status of your running containers via the cluster components.\r\n2. Compare (Diff): It contrasts this real-time reality (status) against the requested blueprints stored in its database (spec).\r\n3. Act: If there is a mismatch, the control plane automatically triggers actions to fix it.\r\n\r\nReal-World Benefits\r\n\r\n• Self-Healing: If a physical server crashes and takes down two of your application containers, Kubernetes instantly detects that your running count dropped from 3 to 1. It will immediately provision two brand new containers on a healthy server to restore your desired state without human intervention.\r\n• No Configuration Drift: If a developer manually deletes a resource or changes a setting on a whim, the reconciliation loop will quickly catch the unauthorized change and overwrite it back to the official declared configuration.\r\n• Seamless Updates: When you want to update your application to a new version, you simply change the version tag in your file and push it. Kubernetes notes the new \"desired state\" and gracefully swaps the old version out for the new version using rolling updates, keeping your application online.",
+      "url": "",
+      "company": "",
+      "created": "2026-10-31T09:23:18",
+      "updated": "2026-10-31T09:23:18"
+    }
+  ]
+}

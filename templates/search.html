@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Search - Learning notebook{% endblock %}
+{% block content %}
+<h1>Search</h1>
+{% if q %}
+  {% if topic_results %}
+  <h2>Topics</h2>
+  <ul class="topic-hits">
+    {% for t in topic_results %}
+    <li><a href="/topic/{{ t.slug }}">{{ t.name }}</a> <span class="count">{{ t.group }}</span></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if results %}
+  <h2>Entries ({{ results|length }})</h2>
+  {% for e in results %}{% set show_topic = true %}{% include "_entry.html" %}{% endfor %}
+  {% endif %}
+
+  {% if not topic_results and not results %}
+  <p class="empty">Nothing matches "{{ q }}". Try fewer or different words.</p>
+  {% endif %}
+{% else %}
+<p class="empty">Type a word in the search box to look through every topic, note, link and question.</p>
+{% endif %}
+{% endblock %}

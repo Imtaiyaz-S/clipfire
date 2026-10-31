@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.name }} - Learning notebook{% endblock %}
+{% block content %}
+<p class="crumb">{{ topic.group }}</p>
+<h1>{{ topic.name }}</h1>
+
+<div class="actions">
+  {% if editable %}
+  <a class="btn" href="/new?topic={{ topic.slug }}&kind=note">Add a note</a>
+  <a class="btn ghost" href="/new?topic={{ topic.slug }}&kind=link">Add a link</a>
+  <a class="btn ghost" href="/new?topic={{ topic.slug }}&kind=question">Add a question</a>
+  {% endif %}
+  {% if total %}<a class="btn ghost" href="/revise?topic={{ topic.slug }}">Revise this topic</a>{% endif %}
+</div>
+
+<nav class="tabs" aria-label="Filter entries">
+  <a href="/topic/{{ topic.slug }}" {% if not kind %}aria-current="page"{% endif %}>All ({{ total }})</a>
+  {% for k, label in type_labels.items() %}
+  <a href="/topic/{{ topic.slug }}?kind={{ k }}" {% if kind == k %}aria-current="page"{% endif %}>{{ label }}s ({{ counts.get(k, 0) }})</a>
+  {% endfor %}
+</nav>
+
+{% for e in entries %}{% include "_entry.html" %}
+{% else %}
+<p class="empty">No entries here yet.{% if editable %} Add a note, link or question with the buttons above.{% endif %}</p>
+{% endfor %}
+
+{% if editable and not total %}
+<form method="post" action="/topics/{{ topic.slug }}/delete" onsubmit="return confirm('Delete this topic?')">
+  <button class="linklike danger">Delete this topic</button>
+</form>
+{% endif %}
+{% endblock %}
